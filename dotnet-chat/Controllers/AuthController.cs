@@ -37,7 +37,7 @@ public class AuthController : Controller {
         }
 
         if (!BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password)) {
-            return BadRequest("Invalid password");
+            return NotFound("Invalid password");
         }
         
         var jwt = _jwtService.Generate(user.Id);
@@ -45,7 +45,7 @@ public class AuthController : Controller {
         Response.Cookies.Append("jwt", jwt, new CookieOptions {
             HttpOnly = true
         });
-        return Ok("Logged in");
+        return Ok();
     }
 
     [HttpGet("user")]
