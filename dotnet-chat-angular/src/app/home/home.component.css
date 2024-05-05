@@ -1,0 +1,14 @@
+.scrollarea{
+    min-height: 650px;
+}
+.form{
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+.not-logged{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

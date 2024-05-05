@@ -1,1 +1,29 @@
-<p>{{message}}</p>
+<h2 class="not-logged" *ngIf="!authenticated">You have to log in first!!</h2>
+<div class="container" *ngIf="authenticated">
+  <div
+    class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary"
+  >
+    <div
+      class="d-flex align-items-center flex-shrink-0 p-3 link-body-emphasis text-decoration-none border-bottom"
+    >
+      <span class="fs-5 fw-semibold">Name : <b>{{ name }}</b></span>
+    </div>
+    <div class="list-group list-group-flush border-bottom scrollarea">
+      <div
+        class="list-group-item list-group-item-action py-3 lh-sm"
+        *ngFor="let message of messages"
+      >
+        <div class="d-flex w-100 align-items-center justify-content-between">
+          <strong class="mb-1">{{ message.username }}</strong>
+        </div>
+        <div class="col-10 mb-1 small">
+          {{ message.message }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <form class="form" (submit)="submit()">
+    <input class="form-control" placeholder="Write a message!" name="message" [(ngModel)]="message"/>
+    <button class="btn btn-primary" type="submit">Send</button>
+  </form>
+</div>
