@@ -1,10 +1,14 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Emitters } from '../emitters/emitters';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {Emitters} from '../emitters/emitters';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 import Pusher from 'pusher-js';
 
+/**
+ * HomeComponent is a component that handles the home page of the application.
+ * It includes methods for initializing the component and submitting messages.
+ */
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -18,10 +22,20 @@ export class HomeComponent implements OnInit {
   messages: any[] = [];
   authenticated = false;
 
-  constructor(private http: HttpClient) {}
+  /**
+   * The constructor for the HomeComponent class.
+   * @param {HttpClient} http - An instance of HttpClient for making HTTP requests.
+   */
+  constructor(private http: HttpClient) {
+  }
 
+  /**
+   * ngOnInit is a lifecycle hook that is called after data-bound properties of a directive are initialized.
+   * In this method, we make a GET request to the /api/user endpoint and subscribe to the response.
+   * We also initialize Pusher for real-time functionality and subscribe to the 'chat' channel.
+   */
   ngOnInit(): void {
-    this.http.get<any>('http://localhost:8000/api/user', { withCredentials: true }).subscribe(
+    this.http.get<any>('http://localhost:8000/api/user', {withCredentials: true}).subscribe(
       (response) => {
         this.name = response.name;
         this.authenticated = true;
@@ -44,6 +58,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /**
+   * submit is a method that makes a POST request to the /chat/message endpoint with the current username and message.
+   * After the request is made, it resets the message input field.
+   */
   submit(): void {
     this.http.post('http://localhost:8000/chat/message', {
       username: this.name,

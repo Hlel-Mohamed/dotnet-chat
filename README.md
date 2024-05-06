@@ -1,4 +1,4 @@
-# dotnet-chat
+# Realtime Chat Application
 
 This is a chat application built with .NET 6 and Angular. The backend is developed using .NET 6 and the frontend is developed using Angular. The application uses Pusher for real-time communication.
 
